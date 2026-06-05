@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title> Deniz <3 Taha </title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Lora', serif;
+            color: #e0e6ed;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .stars {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #e0e6ed, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #e0e6ed, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 130px 80px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 120px, #e0e6ed, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: starLoop 60s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes starLoop {
+            from { background-position: 0 0; }
+            to { background-position: -200px 200px; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 80px;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            width: 340px;
+            height: 230px;
+            margin-bottom: 50px;
+        }
+
+        .envelope-back {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #121c29;
+            border-radius: 4px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            z-index: 1; 
+        }
+
+        /* --- KAYDIRILABİLİR MEKTUP ALANI --- */
+        .letter {
+            position: absolute;
+            bottom: 0;
+            left: 4%;
+            width: 92%;
+            height: 95%;
+            background: #fcfbfa;
+            border-radius: 4px 4px 0 0;
+            z-index: 2; 
+            transition: all 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            padding: 25px 20px;
+            box-sizing: border-box;
+            color: #2b3a50;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+            /* Kaydırma (Scroll) Özelliği */
+            overflow-y: auto;
+            /* Kaydırma çubuğunu estetik olarak gizle */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;  
+        }
+        
+        .letter::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Fotoğrafların Alt Alta Dizilimi */
+        .photo-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .photo-gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            border: 2px solid #e0e0e0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .letter h3 {
+            margin: 0 0 15px 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: #1a2533;
+            font-style: italic;
+        }
+
+        .letter p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 0 0 15px 0;
+            font-weight: 500;
+        }
+
+        .envelope-front {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 115px 170px 115px 170px;
+            border-color: transparent #1a273a #152030 #1a273a;
+            z-index: 3; 
+            pointer-events: none;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 125px 170px 0 170px;
+            border-color: #1e2d42 transparent transparent transparent;
+            z-index: 4; 
+            transform-origin: top;
+            transition: transform 0.9s cubic-bezier(0.25, 0.8, 0.25, 1), z-index 0s 0.3s; 
+        }
+
+        .seal {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%);
+            border-radius: 50%;
+            position: absolute;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            box-shadow: 0 0 15px rgba(168, 192, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #fff;
+            transition: all 0.6s ease;
+        }
+
+        .interaction {
+            text-align: center;
+            width: 100%;
+            max-width: 450px;
+            z-index: 10;
+        }
+
+        .question-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #cdd6e5;
+            margin-bottom: 25px;
+            min-height: 60px;
+            transition: all 0.4s ease;
+            letter-spacing: 0.5px;
+        }
+
+        input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #7c8ea6;
+            color: #fff;
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            padding: 10px;
+            width: 85%;
+            text-align: center;
+            outline: none;
+            transition: all 0.4s ease;
+            margin-bottom: 25px;
+        }
+
+        input:focus {
+            border-bottom: 1px solid #fff;
+            box-shadow: 0 15px 15px -15px rgba(255,255,255,0.4);
+        }
+
+        input::placeholder {
+            color: #5a6b82;
+            font-style: italic;
+        }
+
+        button {
+            background: transparent;
+            color: #fff;
+            border: 1px solid #7c8ea6;
+            padding: 10px 35px;
+            border-radius: 30px;
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #fff;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        .seal-broken {
+            transform: translateX(-50%) scale(0);
+            opacity: 0;
+        }
+
+        .flap-open {
+            transform: rotateX(180deg);
+            z-index: 1; 
+        }
+
+        .letter-peek {
+            transform: translateY(-60px); 
+        }
+
+        .letter-out {
+            transform: translateY(-175px);
+        }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+    
+    <div class="container">
+        <div class="envelope-wrapper">
+            <div class="envelope-back"></div>
+            
+            <div class="letter" id="letter">
+                <div class="photo-gallery">
+                    <img src="foto1.jpg" alt="Fotolarımız">
+                    <img src="foto2.jpg" alt="Fotolarımız">
+                    <img src="foto3.jpg" alt="Fotolarımız">
+                </div>
+                
+                <h3>Aşkımm</h3>
+                <p>YENİ YILIMIZ KUTLU OLSUNNN NİCE YILLARA AŞKIM BENİMM İYİ Kİ BENİM HAYATIMDASIN</p>
+                <p>SENİ ÇOK SEVİYORUMM VE SENİ HER ZAMAN KOCAMAN SEVCEM BİLİYORUM SEN DE BENİ SEVİYOSUNN HİSSEDİYORUM</p>
+                <p>VE BANA BU DUYGULARI HİSSETTİRDİĞİN İÇİN SANA BUNLARI YAZARKEN TEKRAR AŞIK OLDUM Bİ TANEMM </p>
+            </div>
+            
+            <div class="envelope-front"></div>
+            <div class="flap" id="flap"></div>
+            <div class="seal" id="seal">✧</div>
+        </div>
+
+        <div class="interaction" id="interaction">
+            <div class="question-text" id="question">Soru 1'i buraya yazabilirsin</div>
+            <input type="text" id="answer" placeholder="Cevapları Buraya Yaz" autocomplete="off">
+            <br>
+            <button id="answerBtn" onclick="nextStep()">Cevapla</button>
+        </div>
+    </div>
+
+    <script>
+        // --- SORULARI BURADAN DEĞİŞTİREBİLİRSİN ---
+        const questions = [
+            "Beraberken En Çok Hoşlandığımız Date",
+            "En Çok Yaptığımız Şaka",
+            "İkimizin Ortak Şarkı İsimleri"
+        ];
+        
+        let currentStep = 0;
+        let isProcessing = false;
+
+        function nextStep() {
+            if (isProcessing) return;
+
+            const input = document.getElementById("answer");
+            const questionEl = document.getElementById("question");
+            const btn = document.getElementById("answerBtn");
+            
+            if(input.value.trim() === "") {
+                input.placeholder = "Cevapları Buraya Yaz";
+                return;
+            }
+
+            isProcessing = true;
+            currentStep++;
+            input.value = ""; 
+
+            questionEl.style.opacity = 0;
+            input.style.opacity = 0; 
+            btn.style.opacity = 0;
+
+            setTimeout(() => {
+                questionEl.innerText = "Doğruuu";
+                questionEl.style.color = "#a8c0ff"; 
+                questionEl.style.opacity = 1;
+
+                setTimeout(() => {
+                    questionEl.style.opacity = 0;
+                    questionEl.style.color = "#cdd6e5"; 
+
+                    setTimeout(() => {
+                        if (currentStep === 1) {
+                            document.getElementById("seal").classList.add("seal-broken");
+                            questionEl.innerText = questions[1];
+                        } 
+                        else if (currentStep === 2) {
+                            document.getElementById("flap").classList.add("flap-open");
+                            document.getElementById("letter").classList.add("letter-peek");
+                            questionEl.innerText = questions[2];
+                        } 
+                        else if (currentStep === 3) {
+                            document.getElementById("letter").classList.remove("letter-peek");
+                            document.getElementById("letter").classList.add("letter-out");
+                            document.getElementById("interaction").style.display = "none";
+                        }
+                        
+                        if (currentStep < 3) {
+                            questionEl.style.opacity = 1;
+                            input.style.opacity = 1;
+                            btn.style.opacity = 1;
+                            isProcessing = false;
+                        }
+                    }, 400); 
+                }, 1200); 
+            }, 400); 
+        }
+
+        // Sayfa yüklendiğinde ilk soruyu ekrana basar
+        document.getElementById("question").innerText = questions[0];
+    </script>
+</body>
+</html>
